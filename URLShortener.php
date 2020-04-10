@@ -54,6 +54,25 @@ class URLShortener
     return $response;
   }
 
+  public function getLinksCount()
+  {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, "https://api.rebrandly.com/v1/links/count");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "apikey: " . $this->data["apikey"],
+        "Content-Type: application/json",
+        "workspace: " . $this->data["workspace"]
+    ));
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $response = json_decode($result,true);
+    return $response["count"];
+  }
+
   public function getIDbySlashTag()
   {
     $ch = curl_init();

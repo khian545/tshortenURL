@@ -19,7 +19,7 @@
   ?>
 
 <div class="container">
-  
+
   <div class="row">
     <div class="col-sm">
 
@@ -37,9 +37,14 @@
     </div>
   </div>
 
-  <h5>List of Shortened Links</h5>
+  <?php
+    include "URLShortener.php";
+    $shortener = new URLShortener();
+    $count = $shortener->getLinksCount();
+  ?>
 
-  <table class="table">
+  <h5>List of Shortened Links<span class="badge badge-success"><?=$count ?> links created</span></h5>
+  <table class="table table-striped">
     <tr>
       <th>No.</th>
       <th>ID</th>
@@ -48,9 +53,6 @@
       <th>Action</th>
     </tr>
     <?php
-      include "URLShortener.php";
-
-      $shortener = new URLShortener();
       $links = $shortener->getLinks();
       $counter = 1;
       foreach ($links as $link) {
