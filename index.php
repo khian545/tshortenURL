@@ -19,44 +19,7 @@
   ?>
 
 <div class="container">
-
-  <h5>List of Shortened Links</h5>
-
-  <table class="table">
-    <tr>
-      <th>No.</th>
-      <th>ID</th>
-      <th>Short URL</th>
-      <th>Destination URL</th>
-      <th>Clicks</th>
-      <th>Action</th>
-    </tr>
-    <?php
-      include "URLShortener.php";
-
-      $shortener = new URLShortener();
-      $links = $shortener->getLinks();
-      $counter = 1;
-      foreach ($links as $link) {
-        echo '<tr>';
-        echo '<td>'. $counter++ . '</td>';
-        echo '<td>'. $link["id"] . '</td>';
-        echo '<td><a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].'</a></td>';
-        echo '<td>'. $link["destination"] . '</td>';
-        echo '<td>'. $link["clicks"] . '</td>';
-        echo '<td>';
-          echo '<form action="delete.php" method="get">';
-          echo '<div class="form-group">';
-          echo '<input type="hidden" value="' . $link["slashtag"] . '" name="slashtag" />';
-          echo '<button class="btn btn-danger" type="submit">Delete</button>';
-          echo '</div>';
-          echo '</form>';
-        echo '</td>';
-        echo '</tr>';
-      }
-     ?>
-   </table>
-
+  
   <div class="row">
     <div class="col-sm">
 
@@ -73,6 +36,46 @@
 
     </div>
   </div>
+
+  <h5>List of Shortened Links</h5>
+
+  <table class="table">
+    <tr>
+      <th>No.</th>
+      <th>ID</th>
+      <th>Short URL</th>
+      <th>Destination URL</th>
+      <th>Action</th>
+    </tr>
+    <?php
+      include "URLShortener.php";
+
+      $shortener = new URLShortener();
+      $links = $shortener->getLinks();
+      $counter = 1;
+      foreach ($links as $link) {
+        echo '<tr>';
+        echo '<td>'. $counter++ . '</td>';
+        echo '<td>'. $link["id"] . '</td>';
+        echo '<td><span class="badge badge-success">'.$link["clicks"].
+                ' clicks</span>
+                <a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].
+                '</a></td>';
+        echo '<td>'. $link["destination"] . '</td>';
+        echo '<td>';
+          echo '<form action="delete.php" method="get">';
+          echo '<div class="form-group">';
+          echo '<input type="hidden" value="' . $link["slashtag"] . '" name="slashtag" />';
+          echo '<button class="btn btn-danger" type="submit">Delete</button>';
+          echo '</div>';
+          echo '</form>';
+        echo '</td>';
+        echo '</tr>';
+      }
+     ?>
+   </table>
+
+
   <!--
   <div class="row">
     <div class="col-sm">
