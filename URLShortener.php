@@ -1,5 +1,4 @@
 <?php
-
 class URLShortener
 {
   public $data = ["fullName" => "rebrand.ly",
@@ -9,6 +8,10 @@ class URLShortener
             "title" => "Rebrandly YouTube channel",
             "apikey" => "54eec15ff2634b4c9fee25a517ac83d5",
             "workspace" => "ea9d1b8ed5df476e9dcb06cb684b0420"];
+
+  public function __construct(){
+    error_reporting(-1);
+  }
 
   public function generateShortURL()
   {

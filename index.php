@@ -1,7 +1,7 @@
 
   <?php
     include "template/header.php";
-    include "URLShortener.php";
+    include "URLShortener.php";    
 
     $shortener = new URLShortener();
     $count = $shortener->getLinksCount();
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <h5>List of Shortened Links <span class="badge badge-warning"><?=$count ?> links created</span></h5>
+  <h3>List of Shortened Links <span class="badge badge-warning"><?=$count ?> links created</span></h3>
   <table class="table table-striped">
     <tr>
       <th>No.</th>
