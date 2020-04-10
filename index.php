@@ -19,7 +19,6 @@
   ?>
 
 <div class="container">
-  <h1>URL Shortener</h1>
 
   <h5>List of Shortened Links</h5>
 
