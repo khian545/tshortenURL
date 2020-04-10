@@ -50,7 +50,7 @@
           echo '<form action="delete.php" method="get">';
           echo '<div class="form-group">';
           echo '<input type="hidden" value="' . $link["slashtag"] . '" name="slashtag" />';
-          echo '<button class="btn btn-danger" type="submit">Delete</button>';
+          echo '<button class="btn btn-danger btn-sm" type="submit">Remove</button>';
           echo '</div>';
           echo '</form>';
         echo '</td>';
