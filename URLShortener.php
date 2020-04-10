@@ -10,7 +10,7 @@ class URLShortener
             "workspace" => "ea9d1b8ed5df476e9dcb06cb684b0420"];
 
   public function __construct(){
-    error_reporting(-1);
+    error_reporting(-1); //error reporting flags
   }
 
   public function generateShortURL()
