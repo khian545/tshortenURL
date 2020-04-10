@@ -12,27 +12,33 @@ class URLShortener
 
   public function generateShortURL()
   {
-    $response = [];
-    $domain_data["fullName"] = $this->data["fullName"];
-    $post_data["destination"] = $this->data["destination"];
-    $post_data["domain"] = $domain_data;
-    $post_data["slashtag"] = $this->data["slashtag"];
-    $post_data["title"] = $this->data["title"];
-    $ch = curl_init("https://api.rebrandly.com/v1/links");
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "apikey: ". $this->data["apikey"],
-        "Content-Type: application/json",
-        "workspace: " . $this->data["workspace"]
-    ));
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    try{
+      $response = [];
+      $domain_data["fullName"] = $this->data["fullName"];
+      $post_data["destination"] = $this->data["destination"];
+      $post_data["domain"] = $domain_data;
+      $post_data["slashtag"] = $this->data["slashtag"];
+      $post_data["title"] = $this->data["title"];
+      $ch = curl_init("https://api.rebrandly.com/v1/links");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+          "apikey: ". $this->data["apikey"],
+          "Content-Type: application/json",
+          "workspace: " . $this->data["workspace"]
+      ));
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 
-    $result = curl_exec($ch);
+      $result = curl_exec($ch);
 
-    curl_close($ch);
-    $response = json_decode($result, true);
-    echo "Short URL is: " . $response["shortUrl"];
+      curl_close($ch);
+      $response = json_decode($result, true);
+      return ($response["shortUrl"] == null) ? '' :$response["shortUrl"];
+
+    }catch(Exception $e){
+      return '';
+    }
+
   }
 
   public function getLinks()

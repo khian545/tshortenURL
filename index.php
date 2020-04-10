@@ -1,25 +1,13 @@
 
   <?php
-  include "template/header.php"
-    // include 'URLShortener.php';
-    // $shortener = new URLShortener();
-    // echo '...Generating...';
-    // echo '<br/>';
-    // $shortener->generateShortURL();
-    // echo '<br/>'; echo '<br/>';
-    // echo '...Retrieving ID...';
-    // echo '<br/>';
-    // echo "Short URL ID is: " . $shortener->getIDbySlashTag('ttgfhh');
-    // echo '<br/>'; echo '<br/>';
-    // echo '...Deleting Link...';
-    // echo '<br/>';
-    // $shortener->deleteShortenLink($shortener->getIDbySlashTag('ttgfhh'));
-    // echo '<br/>'; echo '<br/>';
-    // echo '...Done...';
+    include "template/header.php";
+    include "URLShortener.php";
+
+    $shortener = new URLShortener();
+    $count = $shortener->getLinksCount();
   ?>
 
 <div class="container">
-
   <div class="row">
     <div class="col-sm">
 
@@ -37,13 +25,7 @@
     </div>
   </div>
 
-  <?php
-    include "URLShortener.php";
-    $shortener = new URLShortener();
-    $count = $shortener->getLinksCount();
-  ?>
-
-  <h5>List of Shortened Links<span class="badge badge-success"><?=$count ?> links created</span></h5>
+  <h5>List of Shortened Links <span class="badge badge-warning"><?=$count ?> links created</span></h5>
   <table class="table table-striped">
     <tr>
       <th>No.</th>
