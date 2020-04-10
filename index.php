@@ -28,6 +28,8 @@
       <th>ID</th>
       <th>Short URL</th>
       <th>Destination URL</th>
+      <th>Clicks</th>
+      <th>Action</th>
     </tr>
     <?php
       include "URLShortener.php";
@@ -39,8 +41,9 @@
         echo '<tr>';
         echo '<td>'. $counter++ . '</td>';
         echo '<td>'. $link["id"] . '</td>';
-        echo '<td>'. $link["shortUrl"] . '</td>';
+        echo '<td><a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].'</a></td>';
         echo '<td>'. $link["destination"] . '</td>';
+        echo '<td>'. $link["clicks"] . '</td>';
         echo '<td>';
           echo '<form action="delete.php" method="get">';
           echo '<div class="form-group">';
