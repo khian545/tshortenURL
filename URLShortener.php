@@ -1,16 +1,22 @@
 <?php
 class URLShortener
 {
-  public $data = ["fullName" => "rebrand.ly",
-  "destination" => "https://www.youtube.com/channel/UCHK4HD0ltu1-I212icLPt3g",
-  "domain" => "",
-  "slashtag" => "",
-  "title" => "Rebrandly YouTube channel",
-  "apikey" => "54eec15ff2634b4c9fee25a517ac83d5",
-  "workspace" => "ea9d1b8ed5df476e9dcb06cb684b0420"];
+  public $data = ["fullName" => "",
+                  "destination" => "",
+                  "domain" => "",
+                  "slashtag" => "",
+                  "title" => "",
+                  "apikey" => "",
+                  "workspace" => ""];
 
-  public function __construct(){
+  public function __construct()
+  {
     error_reporting(-1); //error reporting flags
+    $this->data["fullName"] = "rebrand.ly";
+    $this->data["destination"] = "https://www.youtube.com/channel/UCHK4HD0ltu1-I212icLPt3g";
+    $this->data["title"] = "Rebrandly YouTube channel";
+    $this->data["apikey"] = "54eec15ff2634b4c9fee25a517ac83d5";
+    $this->data["workspace"] = "ea9d1b8ed5df476e9dcb06cb684b0420";
   }
 
   public function generateShortURL()
@@ -45,7 +51,8 @@ class URLShortener
 
   }
 
-  public function getTitle(){
+  public function getTitle()
+  {
     $html = $this->fileGetContentsCurl($this->data["destination"]);
 
     //parsing begins here:
