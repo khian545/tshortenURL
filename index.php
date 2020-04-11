@@ -1,7 +1,7 @@
 
   <?php
     include "template/header.php";
-    include "URLShortener.php";    
+    include "URLShortener.php";
 
     $shortener = new URLShortener();
     $count = $shortener->getLinksCount();
@@ -45,7 +45,7 @@
                 ' clicks</span>
                 <a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].
                 '</a></td>';
-        echo '<td>'. $link["destination"] . '</td>';
+        echo '<td>'. $link["destination"] . '<br/><span class="badge badge-primary">'.$link["title"].'</span></td>';
         echo '<td>';
           echo '<form action="delete.php" method="get">';
           echo '<div class="form-group">';
