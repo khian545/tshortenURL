@@ -61,10 +61,9 @@ if($slashtagForDelete){
       echo '<tr>';
       echo '<td>'. $counter++ . '</td>';
       echo '<td>'. $link["id"] . '</td>';
-      echo '<td><span class="badge badge-success">'.$link["clicks"].
-      ' clicks</span>
-      <a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].
-      '</a></td>';
+      echo '<td><a target="_blank" href="http://'. $link["shortUrl"] . '"/>'.$link["shortUrl"].
+      '</a><br/><span class="badge badge-success">'.$link["clicks"].
+      ' clicks</span></td>';
       echo '<td>'. $link["destination"] . '<br/><span class="badge badge-primary">'.$link["title"].'</span></td>';
       echo '<td>';
       echo '<form action="index.php" method="post">';
