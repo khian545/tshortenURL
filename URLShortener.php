@@ -161,8 +161,10 @@ class URLShortener
      $result = json_decode($result,true);
      curl_close($ch);
 
-     echo $id . " has been deleted.";
-     echo $result["status"];
+     $data = ["id" => $id,
+              "status" => $result["status"]];
+
+     return $data;
   }
 }
 
