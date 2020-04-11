@@ -2,12 +2,12 @@
 class URLShortener
 {
   public $data = ["fullName" => "rebrand.ly",
-            "destination" => "https://www.youtube.com/channel/UCHK4HD0ltu1-I212icLPt3g",
-            "domain" => "",
-            "slashtag" => "",
-            "title" => "Rebrandly YouTube channel",
-            "apikey" => "54eec15ff2634b4c9fee25a517ac83d5",
-            "workspace" => "ea9d1b8ed5df476e9dcb06cb684b0420"];
+  "destination" => "https://www.youtube.com/channel/UCHK4HD0ltu1-I212icLPt3g",
+  "domain" => "",
+  "slashtag" => "",
+  "title" => "Rebrandly YouTube channel",
+  "apikey" => "54eec15ff2634b4c9fee25a517ac83d5",
+  "workspace" => "ea9d1b8ed5df476e9dcb06cb684b0420"];
 
   public function __construct(){
     error_reporting(-1); //error reporting flags
@@ -25,9 +25,9 @@ class URLShortener
       $post_data["title"] = $title;
       $ch = curl_init("https://api.rebrandly.com/v1/links");
       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          "apikey: ". $this->data["apikey"],
-          "Content-Type: application/json",
-          "workspace: " . $this->data["workspace"]
+        "apikey: ". $this->data["apikey"],
+        "Content-Type: application/json",
+        "workspace: " . $this->data["workspace"]
       ));
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -46,7 +46,7 @@ class URLShortener
   }
 
   public function getTitle(){
-    $html = $this->file_get_contents_curl($this->data["destination"]);
+    $html = $this->fileGetContentsCurl($this->data["destination"]);
 
     //parsing begins here:
     $doc = new DOMDocument();
@@ -60,11 +60,11 @@ class URLShortener
 
     for ($i = 0; $i < $metas->length; $i++)
     {
-    $meta = $metas->item($i);
-    if($meta->getAttribute('name') == 'description')
-    $description = $meta->getAttribute('content');
-    if($meta->getAttribute('name') == 'keywords')
-    $keywords = $meta->getAttribute('content');
+      $meta = $metas->item($i);
+      if($meta->getAttribute('name') == 'description')
+      $description = $meta->getAttribute('content');
+      if($meta->getAttribute('name') == 'keywords')
+      $keywords = $meta->getAttribute('content');
     }
     return $title;
     //echo "Title: $title". '<br/><br/>';
@@ -72,7 +72,7 @@ class URLShortener
     //echo "Keywords: $keywords";
   }
 
-  public function file_get_contents_curl($url)
+  private function fileGetContentsCurl($url)
   {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -92,9 +92,9 @@ class URLShortener
     curl_setopt($ch, CURLOPT_URL, "https://api.rebrandly.com/v1/links");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "apikey: " . $this->data["apikey"],
-        "Content-Type: application/json",
-        "workspace: " . $this->data["workspace"]
+      "apikey: " . $this->data["apikey"],
+      "Content-Type: application/json",
+      "workspace: " . $this->data["workspace"]
     ));
 
     $result = curl_exec($ch);
@@ -111,9 +111,9 @@ class URLShortener
     curl_setopt($ch, CURLOPT_URL, "https://api.rebrandly.com/v1/links/count");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "apikey: " . $this->data["apikey"],
-        "Content-Type: application/json",
-        "workspace: " . $this->data["workspace"]
+      "apikey: " . $this->data["apikey"],
+      "Content-Type: application/json",
+      "workspace: " . $this->data["workspace"]
     ));
 
     $result = curl_exec($ch);
@@ -130,9 +130,9 @@ class URLShortener
     curl_setopt($ch, CURLOPT_URL, "https://api.rebrandly.com/v1/links?slashtag=" . $this->data["slashtag"]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "apikey: " . $this->data["apikey"],
-        "Content-Type: application/json",
-        "workspace: " . $this->data["workspace"]
+      "apikey: " . $this->data["apikey"],
+      "Content-Type: application/json",
+      "workspace: " . $this->data["workspace"]
     ));
 
     $result = curl_exec($ch);
@@ -144,27 +144,27 @@ class URLShortener
 
   public function deleteShortenLink()
   {
-     $id = $this->getIDbySlashTag($this->data["slashtag"]);
-     $url = "https://api.rebrandly.com/v1/links/" . $id;
-     $ch = curl_init();
-     curl_setopt($ch, CURLOPT_URL, $url);
-     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-     //curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-         "apikey: " . $this->data["apikey"],
-         "Content-Type: application/json",
-         "workspace: " . $this->data["workspace"]
-     ));
+    $id = $this->getIDbySlashTag($this->data["slashtag"]);
+    $url = "https://api.rebrandly.com/v1/links/" . $id;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+    //curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      "apikey: " . $this->data["apikey"],
+      "Content-Type: application/json",
+      "workspace: " . $this->data["workspace"]
+    ));
 
-     $result = curl_exec($ch);
-     $result = json_decode($result,true);
-     curl_close($ch);
+    $result = curl_exec($ch);
+    $result = json_decode($result,true);
+    curl_close($ch);
 
-     $data = ["id" => $id,
-              "status" => $result["status"]];
+    $data = ["id" => $id,
+    "status" => $result["status"]];
 
-     return $data;
+    return $data;
   }
 }
 
