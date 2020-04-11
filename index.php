@@ -2,6 +2,7 @@
 <?php
 include "template/header.php";
 include "URLShortener.php";
+include "PromptMessageTemplate.php";
 
 $shortener = new URLShortener();
 $count = $shortener->getLinksCount();
@@ -36,12 +37,7 @@ if($slashtagForDelete){
 
   <?php
   if($deleteSuccess){
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Removed!</strong> '.$deletedLinkData['id'].' has been removed.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-    </div>';
+    PromptMessageTemplate::MessageSuccess($deletedLinkData['id'] . ' has been deleted.');
   }
   ?>
 
