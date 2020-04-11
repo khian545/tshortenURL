@@ -3,6 +3,7 @@
 include "template/header.php";
 include "URLShortener.php";
 include "PromptMessageTemplate.php";
+include "TForm.php";
 
 $shortener = new URLShortener();
 $count = $shortener->getLinksCount();
@@ -21,16 +22,18 @@ if($slashtagForDelete){
   <div class="row">
     <div class="col-sm">
 
-      <form action="generate.php" method="get">
-        <div class="form-group">
-          <label>Destination URL</label>
-          <input class="form-control" name="destination" type="text" />
-          <small  class="form-text text-muted">Enter the link here.</small>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Create</button>
-        </div>
-      </form>
+      <?php
+      TForm::$data["action"] = 'generate.php';
+      TForm::$data["method"] = 'get';
+      TForm::addControl('<label>Destination URL</label>');
+      TForm::addControl('<input class="form-control" name="destination" type="text" />');
+      TForm::addControl('<small  class="form-text text-muted">Enter the link here.</small>');
+      TForm::toFormGroup();
+      TForm::addControl('<button class="btn btn-primary" type="submit">Create</button>');
+      Tform::toFormGroup();
+      TForm::generateForm();
+      ?>
+
 
     </div>
   </div>
