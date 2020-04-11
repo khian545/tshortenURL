@@ -2,7 +2,7 @@
 <?php
 include "template/header.php";
 include "URLShortener.php";
-include "PromptMessageTemplate.php";
+include "TPromptMessage.php";
 include "TForm.php";
 
 $shortener = new URLShortener();
@@ -21,10 +21,8 @@ if($slashtagForDelete){
 <div class="container">
   <div class="row">
     <div class="col-sm">
-
       <?php
-      TForm::$data["action"] = 'generate.php';
-      TForm::$data["method"] = 'get';
+      TForm::start('generate.php','get');
       TForm::addControl('<label>Destination URL</label>');
       TForm::addControl('<input class="form-control" name="destination" type="text" />');
       TForm::addControl('<small  class="form-text text-muted">Enter the link here.</small>');
@@ -33,14 +31,12 @@ if($slashtagForDelete){
       Tform::toFormGroup();
       TForm::generateForm();
       ?>
-
-
     </div>
   </div>
 
   <?php
   if($deleteSuccess){
-    PromptMessageTemplate::MessageSuccess($deletedLinkData['id'] . ' has been deleted.');
+    TPromptMessage::MessageSuccess($deletedLinkData['id'] . ' has been deleted.');
   }
   ?>
 
@@ -65,12 +61,11 @@ if($slashtagForDelete){
       ' clicks</span></td>';
       echo '<td>'. $link["destination"] . '<br/><span class="badge badge-primary">'.$link["title"].'</span></td>';
       echo '<td>';
-      echo '<form action="index.php" method="post">';
-      echo '<div class="form-group">';
-      echo '<input type="hidden" value="' . $link["slashtag"] . '" name="delete-slashtag" />';
-      echo '<button class="btn btn-danger btn-sm" type="submit">Remove</button>';
-      echo '</div>';
-      echo '</form>';
+        TForm::start('index.php','post');
+        TForm::addControl('<input type="hidden" value="' . $link["slashtag"] . '" name="delete-slashtag" />');
+        TForm::addControl('<button class="btn btn-danger btn-sm" type="submit">Remove</button>');
+        TForm::toFormGroup();
+        TForm::generateForm();
       echo '</td>';
       echo '</tr>';
     }

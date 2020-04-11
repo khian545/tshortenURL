@@ -1,5 +1,5 @@
 <?php
-class PromptMessageTemplate{
+class TPromptMessage{
   public static function MessageSuccess($message){
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Success!</strong> '.$message.'

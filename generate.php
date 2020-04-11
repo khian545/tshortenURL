@@ -1,6 +1,6 @@
 <?php
 include "template/header.php";
-include "PromptMessageTemplate.php";
+include "TPromptMessage.php";
 ?>
 
 <div class="container">
@@ -14,9 +14,9 @@ include "PromptMessageTemplate.php";
       echo '<br/>';
       $shorURL = $shortener->generateShortURL();
       if($shorURL === ''){
-        PromptMessageTemplate::MessageFailed('There was a problem with your URL.');
+        TPromptMessage::MessageFailed('There was a problem with your URL.');
       }else{
-        PromptMessageTemplate::MessageSuccess('<a target="_blank" href="http://'.$shorURL.'">'.$shorURL.'</a> was generated.');
+        TPromptMessage::MessageSuccess('<a target="_blank" href="http://'.$shorURL.'">'.$shorURL.'</a> was generated.');
       }
       echo '<br/>'; echo '<br/>';
       ?>

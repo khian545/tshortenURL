@@ -12,6 +12,14 @@ class TForm{
 
   }
 
+  public static function start($action = '', $method = '', $class = ''){
+    self::$data['class'] = $class;
+    self::$data['action'] = $action;
+    self::$data['method'] = $method;
+    self::$formControls = [];
+    self::$groupedControls = [];
+  }
+  
   public static function generateForm(){
     self::$openTag = '<form class="'.self::$data['class'].'" action="'.self::$data['action'].'"
                         method="'.self::$data['method'].'" >';
